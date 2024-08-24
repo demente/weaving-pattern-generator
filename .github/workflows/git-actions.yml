@@ -1,0 +1,10 @@
+name: Build Pipeline
+run-name: build
+on: [push]
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm run build
+      - run: npm run eslint --fix
+      - run: npm run test
