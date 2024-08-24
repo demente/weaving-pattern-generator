@@ -5,6 +5,12 @@ jobs:
   Build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+        node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
       - run: npm run build
-      - run: npm run eslint --fix
-      - run: npm run test
+      - run: npm test
