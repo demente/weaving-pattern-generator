@@ -1,4 +1,17 @@
 
-export default function App(){
-    return <div>Work in progress</div>
+import InputArea from "./components/InputArea";
+import Diagram from "./components/Diagram";
+import { Container } from "@mui/material";
+import { WeaveType } from "./enum/WeaveType";
+import { generatePattern } from "./Generator";
+
+export default function App() {
+    const onGeneratePattern = (weaveType: WeaveType, underWarp: number, overWarp: number, repeat: number, shift: number) => {
+        generatePattern(weaveType, underWarp, overWarp, repeat, shift)
+    }
+
+    return <Container maxWidth="lg">
+        <InputArea onGeneratePattern={onGeneratePattern} />
+        <Diagram />
+    </Container>
 }

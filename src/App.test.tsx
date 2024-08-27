@@ -2,9 +2,10 @@ import { render } from "@testing-library/react";
 import App from "./App";
 
 describe("App", () => {
-  test("renders work in progress", async () => {
+  test("renders application components", async () => {
     const app = render(<App />);
-    expect(app.queryByText("Work in progress")).not.toBe(null)
+    expect(app.findByRole("InputArea")).not.toBe(null)
+    expect(app.findByRole("Diagram")).not.toBe(null)
   });
 
 });
