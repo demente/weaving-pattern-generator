@@ -55,4 +55,23 @@ function generatePattern(weaveType: WeaveType, underWarp: number, overWarp: numb
     return result
 }
 
-export { generatePattern }
+function transposePattern(pattern: Interlacing[][]) {
+    const maxRowLength = Math.max(...pattern.map(row => row.length));
+
+    const result: Interlacing[][] = []
+
+    for (let i = 0; i < maxRowLength; i++) {
+        result[i] = [];
+    }
+
+    for (let i = 0; i < pattern.length; i++) {
+        for (let j = 0; j < pattern[i].length; j++) {
+            result[j][i] = pattern[i][j];
+        }
+    }
+
+    return result
+
+}
+
+export { generatePattern, transposePattern }

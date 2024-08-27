@@ -3,15 +3,19 @@ import InputArea from "./components/InputArea";
 import Diagram from "./components/Diagram";
 import { Container } from "@mui/material";
 import { WeaveType } from "./enum/WeaveType";
-import { generatePattern } from "./Generator";
+import { generatePattern, transposePattern } from "./Generator";
+import { useState } from "react";
+import { Interlacing } from "./enum/Interlacing";
 
 export default function App() {
+    const [pattern, setPattern] = useState<Interlacing[][]>([])
     const onGeneratePattern = (weaveType: WeaveType, underWarp: number, overWarp: number, repeat: number, shift: 0 | 1) => {
-        generatePattern(weaveType, underWarp, overWarp, repeat, shift)
+        const generatedPattern = generatePattern(weaveType, underWarp, overWarp, repeat, shift)
+        setPattern(transposePattern(generatedPattern))
     }
 
     return <Container maxWidth="lg">
         <InputArea onGeneratePattern={onGeneratePattern} />
-        <Diagram />
+        <Diagram pattern={pattern} />
     </Container>
 }
