@@ -6,7 +6,7 @@ import { WeaveType } from "./enum/WeaveType";
 import { generatePattern } from "./Generator";
 
 export default function App() {
-    const onGeneratePattern = (weaveType: WeaveType, underWarp: number, overWarp: number, repeat: number, shift: number) => {
+    const onGeneratePattern = (weaveType: WeaveType, underWarp: number, overWarp: number, repeat: number, shift: 0 | 1) => {
         generatePattern(weaveType, underWarp, overWarp, repeat, shift)
     }
 

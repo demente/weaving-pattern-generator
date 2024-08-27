@@ -3,7 +3,7 @@ import { LIFTED_START, WeaveType } from "./enum/WeaveType";
 
 
 
-function generatePattern(weaveType: WeaveType, underWarp: number, overWarp: number, repeat: number, shift: number) {
+function generatePattern(weaveType: WeaveType, underWarp: number, overWarp: number, repeat: number, shift: 0 | 1) {
     const shiftedResult: Interlacing[][] = []
     let resultColumn: Interlacing[] = []
     const startingPoint: Interlacing = LIFTED_START.includes(weaveType) ? Interlacing.WEFT_UNDER_WARP : Interlacing.WEFT_OVER_WARP
@@ -30,9 +30,14 @@ function generatePattern(weaveType: WeaveType, underWarp: number, overWarp: numb
 
 
     let shiftedColumn: Interlacing[] = []
-    for (let i = 0; i <= shift; i++) {
-        shiftedColumn.push(reverseStartingPoint)
-    } shiftedColumn = shiftedColumn.concat(resultColumn)
+    if (shift === 0) {
+        for (let i = 0; i < sequence; i++) {
+            shiftedColumn.push(reverseStartingPoint)
+        }
+    } else {
+        shiftedColumn.push(startingPoint)
+    }
+    shiftedColumn = shiftedColumn.concat(resultColumn)
 
     shiftedColumn = shiftedColumn.splice(0, 16)
 

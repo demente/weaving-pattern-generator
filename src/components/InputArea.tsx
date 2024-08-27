@@ -2,7 +2,7 @@ import { Box, Button, Container, TextField } from "@mui/material";
 import { useState } from "react";
 import { WeaveType } from "../enum/WeaveType";
 
-export default function InputArea(props: { onGeneratePattern: (weaveType: WeaveType, underWarp: number, overWarp: number, repeat: number, shift: number) => void }) {
+export default function InputArea(props: { onGeneratePattern: (weaveType: WeaveType, underWarp: number, overWarp: number, repeat: number, shift: 0 | 1) => void }) {
     const { onGeneratePattern } = props;
 
     const [weaveType, setWeaveType] = useState('')
@@ -20,7 +20,7 @@ export default function InputArea(props: { onGeneratePattern: (weaveType: WeaveT
                 Number.parseInt(underWarp),
                 Number.parseInt(overWarp),
                 Number.parseInt(repeat),
-                Number.parseInt(shift))
+                Number.parseInt(shift) as unknown as 0 | 1)
         }
     }
 
@@ -30,7 +30,8 @@ export default function InputArea(props: { onGeneratePattern: (weaveType: WeaveT
             && !isNaN(Number.parseInt(underWarp))
             && !isNaN(Number.parseInt(overWarp))
             && !isNaN(Number.parseInt(repeat))
-            && !isNaN(Number.parseInt(shift)))
+            && !isNaN(Number.parseInt(shift))
+            && [0, 1].includes(Number.parseInt(shift)))
     }
 
     return <Container>
