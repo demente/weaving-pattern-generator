@@ -5,14 +5,14 @@ import { Interlacing } from "../enum/Interlacing";
 
 export default function Diagram(props: { pattern: Interlacing[][] }) {
     const { pattern } = props;
-    const generateCells = (row: Interlacing[]) => {
-        return row.map(cell => {
-            return <Cell filled={cell === 1} />
+    const generateCells = (row: Interlacing[], rowNumber: number) => {
+        return row.map((cell, i) => {
+            return <Cell key={`${rowNumber}_${i}`} filled={cell === 1} />
         })
     }
-    const generateRows = pattern.map(row => {
-        return <TableRow>
-            {generateCells(row)}
+    const generateRows = pattern.map((row, index) => {
+        return <TableRow key={`row_${index}`}>
+            {generateCells(row, index)}
         </TableRow>
     })
 
