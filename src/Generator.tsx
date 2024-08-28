@@ -55,7 +55,7 @@ function transposePattern(pattern: Interlacing[][]) {
 
     for (let i = 0; i < pattern.length; i++) {
         for (let j = 0; j < pattern[i].length; j++) {
-            result[j][i] = pattern[i][pattern.length - j - 1];
+            result[j][i] = pattern[i][pattern.length - j];
         }
     }
 
