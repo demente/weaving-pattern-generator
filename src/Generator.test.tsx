@@ -3,7 +3,7 @@ import { generatePattern, transposePattern } from "./Generator";
 
 describe("Generator", () => {
     test("generates plain weave", async () => {
-        const pattern = generatePattern(WeaveType.Plain, 1, 1, 1, 0)
+        const pattern = generatePattern(WeaveType.Plain, 1, 1, 1, 1)
 
         expect(pattern).toHaveLength(16)
         expect(pattern[0]).toHaveLength(16)
@@ -26,7 +26,7 @@ describe("Generator", () => {
     });
 
     test("generates panama weave", async () => {
-        const pattern = generatePattern(WeaveType.Plain, 2, 2, 2, 0)
+        const pattern = generatePattern(WeaveType.Plain, 2, 2, 2, 1)
 
         expect(pattern).toHaveLength(16)
         expect(pattern[0]).toHaveLength(16)
@@ -95,14 +95,14 @@ describe("Generator", () => {
     })
 
     test("transposes generated pattern", async () => {
-        const pattern = [[1, 1, 1, 1], [0, 1, 1, 0], [1, 0, 0, 1]]
+        const pattern = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]
         const transposedPattern = transposePattern(pattern)
 
         expect(transposedPattern).toHaveLength(4)
-        expect(transposedPattern[0]).toEqual([1, 0, 1])
-        expect(transposedPattern[1]).toEqual([1, 1, 0])
-        expect(transposedPattern[2]).toEqual([1, 1, 0])
-        expect(transposedPattern[3]).toEqual([1, 0, 1])
+        expect(transposedPattern[0]).toEqual([4, 8, 12])
+        expect(transposedPattern[1]).toEqual([3, 7, 11])
+        expect(transposedPattern[2]).toEqual([2, 6, 10])
+        expect(transposedPattern[3]).toEqual([1, 5, 9])
     })
 
 

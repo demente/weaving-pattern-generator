@@ -19,10 +19,12 @@ function generatePattern(weaveType: WeaveType, underWarp: number, overWarp: numb
     for (let i = 0; i < oppositeSequence; i++) {
         firstColumn.push(oppositeStartingPoint)
     }
-    while (firstColumn.length < 16) {
+    while (firstColumn.length < 16 + shift * 16) {
         firstColumn = firstColumn.concat(firstColumn)
     }
-    firstColumn = firstColumn.splice(0, 16)
+    let previousColumn = [...firstColumn]
+
+    firstColumn = firstColumn.slice(0, 16)
 
     // if needed repeat first column
 
@@ -30,55 +32,16 @@ function generatePattern(weaveType: WeaveType, underWarp: number, overWarp: numb
         result.push(firstColumn)
     }
 
-    let previousColumn = firstColumn
 
     while (result.length < 16) {
-
-        const shiftedColumn: Interlacing[] = generateShiftedColumn(startingPoint, previousColumn, shift, sequence, oppositeSequence)
+        const shiftedColumn: Interlacing[] = previousColumn.slice(shift, previousColumn.length)
+        previousColumn = [...shiftedColumn]
+        const shiftedShort = [...shiftedColumn].slice(0, 16)
         for (let i = 0; i < repeat; i++) {
-            result.push(shiftedColumn)
+            result.push(shiftedShort)
         }
-        previousColumn = shiftedColumn
-
     }
     return result
-}
-
-function generateShiftedColumn(startingPoint: Interlacing, previousColumn: Interlacing[], shift: number, sequence: number, oppositeSequence: number) {
-    const oppositePoint = startingPoint === Interlacing.WEFT_OVER_WARP ? Interlacing.WEFT_UNDER_WARP : Interlacing.WEFT_OVER_WARP
-    let shiftedColumn: Interlacing[] = []
-    if (shift === 0) { //if shift is 0, it's opposite binding
-        for (let i = 0; i < sequence; i++) {
-            shiftedColumn.push(oppositePoint)
-        }
-    } else {
-        const pointOldPosition = previousColumn.indexOf(startingPoint)
-        const pointNewPosition = pointOldPosition + shift
-
-        if (pointNewPosition < oppositeSequence) {
-            for (let i = 0; i < pointNewPosition; i++) {
-                shiftedColumn.push(oppositePoint)
-            }
-        } else {
-
-            for (let i = 0; i < oppositeSequence - pointOldPosition; i++) {
-                shiftedColumn.unshift(oppositePoint)
-            }
-            if (shiftedColumn.length < shift) {
-                for (let i = 0; i < sequence; i++) {
-                    shiftedColumn.unshift(startingPoint)
-                }
-
-                const currentLength = shiftedColumn.length
-                for (let i = 0; i < shift - currentLength; i++) {
-                    shiftedColumn.unshift(oppositePoint)
-                }
-            }
-        }
-    }
-    shiftedColumn = shiftedColumn.concat(previousColumn)
-    shiftedColumn = shiftedColumn.splice(0, 16)
-    return shiftedColumn
 }
 
 function transposePattern(pattern: Interlacing[][]) {
@@ -92,9 +55,10 @@ function transposePattern(pattern: Interlacing[][]) {
 
     for (let i = 0; i < pattern.length; i++) {
         for (let j = 0; j < pattern[i].length; j++) {
-            result[j][i] = pattern[i][j];
+            result[j][i] = pattern[i][pattern.length - j - 1];
         }
     }
+
 
     return result
 
