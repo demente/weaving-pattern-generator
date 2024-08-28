@@ -7,6 +7,4 @@ enum WeaveType {
     SatinLowered = 31
 }
 
-const LIFTED_START = [WeaveType.Plain, WeaveType.Satin, WeaveType.Twill]
-
-export { WeaveType, LIFTED_START }
+export { WeaveType }

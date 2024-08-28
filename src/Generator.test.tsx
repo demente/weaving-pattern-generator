@@ -26,7 +26,7 @@ describe("Generator", () => {
     });
 
     test("generates panama weave", async () => {
-        const pattern = generatePattern(WeaveType.Plain, 2, 2, 2, 1)
+        const pattern = generatePattern(WeaveType.Plain, 2, 2, 2, 2)
 
         expect(pattern).toHaveLength(16)
         expect(pattern[0]).toHaveLength(16)
@@ -58,9 +58,9 @@ describe("Generator", () => {
         expect(pattern[2]).toEqual([0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1])
         expect(pattern[3]).toEqual([1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1])
         expect(pattern[4]).toEqual([1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0])
-        expect(pattern[5]).toEqual([1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1])
+        expect(pattern[5]).toEqual([0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0])
         expect(pattern[6]).toEqual([0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1])
-        expect(pattern[7]).toEqual([0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0])
+        expect(pattern[7]).toEqual([1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1])
         expect(pattern[8]).toEqual([1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0])
         expect(pattern[9]).toEqual([0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0])
         expect(pattern[10]).toEqual([0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1])
