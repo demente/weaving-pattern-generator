@@ -77,22 +77,19 @@ function generateRepeatingPattern(sequence: number, startingPoint: Interlacing, 
 }
 
 function transposePattern(pattern: Interlacing[][]) {
-    const maxRowLength = Math.max(...pattern.map(row => row.length));
+    const numRows = pattern.length;
+    const numCols = pattern[0].length;
+    const result: number[][] = [];
 
-    const result: Interlacing[][] = []
-
-    for (let i = 0; i < maxRowLength; i++) {
-        result[i] = [];
-    }
-
-    for (let i = 0; i < pattern.length; i++) {
-        for (let j = 0; j < pattern[i].length; j++) {
-            result[j][i] = pattern[i][pattern.length - j];
+    for (let col = numCols - 1; col >= 0; col--) {
+        const newRow: number[] = [];
+        for (let row = 0; row < numRows; row++) {
+            newRow.push(pattern[row][col]);
         }
+        result.push(newRow);
     }
 
-
-    return result
+    return result;
 
 }
 
