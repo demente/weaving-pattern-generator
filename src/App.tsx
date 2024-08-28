@@ -9,7 +9,7 @@ import { Interlacing } from "./enum/Interlacing";
 
 export default function App() {
     const [pattern, setPattern] = useState<Interlacing[][]>([])
-    const onGeneratePattern = (weaveType: WeaveType, underWarp: number, overWarp: number, repeat: number, shift: 0 | 1) => {
+    const onGeneratePattern = (weaveType: WeaveType, underWarp: number, overWarp: number, repeat: number, shift: number) => {
         const generatedPattern = generatePattern(weaveType, underWarp, overWarp, repeat, shift)
         setPattern(transposePattern(generatedPattern))
     }
